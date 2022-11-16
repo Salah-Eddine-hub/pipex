@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_2d.c                                          :+:      :+:    :+:   */
+/*   error_cases.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 16:48:42 by sharrach          #+#    #+#             */
-/*   Updated: 2022/10/13 13:56:07 by sharrach         ###   ########.fr       */
+/*   Created: 2022/10/13 13:56:21 by sharrach          #+#    #+#             */
+/*   Updated: 2022/11/16 16:44:06 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
-void	*free_2d(char **arr)
+void    check_args(void)
 {
-	int	i;
+    ft_putstr("args: ./pipex [file1] [cmd1] [cmd2] [file2]\n");
+    exit(1);
+}
 
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free (arr);
-	return (NULL);
+void    wrong_arg(char **cmd)
+{
+    ft_putstr(*cmd);
+    ft_putstr(" cmd not found");
+    free_2d(cmd);
+    exit(1);
 }

@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 22:11:14 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/02 14:55:45 by sharrach         ###   ########.fr       */
+/*   Created: 2022/11/16 11:31:35 by sharrach          #+#    #+#             */
+/*   Updated: 2022/11/16 19:15:55 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-#define PIPEX_H
+#ifndef PIPEX_BONUS_H
+#define PIPEX_BONUS_H
+
 //libraries
 #include <unistd.h>
 #include <stdio.h>
@@ -19,18 +20,29 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <fcntl.h>
+
+
+void    ft_get_cmd_path(char *cmd, char *env[]);
+void    ft_pipex(int argc, char *argv[], char **env);
+void    ft_execute(char *cmd, char **env);
+void    here_doc(int argc, char *argv[]);
 //functions libft
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const	char *str);
-//functions pipex
 void	*free_2d(char **arr);
-void	exec_first_cmd(int *pipefd, int *fd, char **av, char *env[]);
-void	exec_second_cmd(int *pipefd, int *fd, char **av, char *env[]);
-int     ft_get_cmd_path(char **cmd, char *env[]);
-void    wrong_arg(char **cmd);
-void    check_args(void);
+void    ft_error(char *str);
+void	ft_putstr_fd(char *s, int fd);
+void    ft_putstr(char *str);
+
+
+// function get_next_line
+char	*get_next_line(int fd);
+char	*ft_strnljoin(char *s1, char *s2);
+void	ft_bzero(void *s, size_t n);
+char	*ft_strchr(const char *s, int c);
+void	ft_strcpy(char *dst, const char *src);
 
 #endif

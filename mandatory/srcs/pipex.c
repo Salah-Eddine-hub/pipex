@@ -6,11 +6,11 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 22:10:57 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/02 14:53:55 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:58:58 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void	exec_first_cmd(int *pipefd, int *fd, char **av, char *env[])
 {

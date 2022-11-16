@@ -6,11 +6,11 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:31:50 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/02 14:54:52 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:58:54 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 static  char    **get_path(char *env[])
 {
