@@ -6,55 +6,36 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:23:56 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/16 19:37:39 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/18 17:39:16 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-void here_doc(int argc, char *argv[])
+int	here_doc(int argc, char *argv[])
 {
-    int	fd[2];
-	int pid;
+	int		fd[2];
 	char	*line;
 
 	if (argc < 6)
 		ft_error("Error: wrong args count");
 	if (pipe(fd) == -1)
-		perror("pipe");
-	pid = fork();
-	if (pid == -1)
-		perror("fork");
-	if (pid == 0)
+		ft_perror("pipe");
+	close(fd[STDIN_FILENO]);
+	while (1)
 	{
-		close(fd[STDIN_FILENO]);
-		ft_putstr_fd("here_doc> ", 1);
-		line = get_next_line(1);
-		while(line)
+		ft_putstr_fd("here_doc> ", STDOUT_FILENO);
+		line = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(line, argv[2], ft_strlen(argv[2])) == 0 
+			&& line[ft_strlen(argv[2])] == '\n')
 		{
-			if(ft_strncmp(argv[2], line, ft_strlen(line)) == 0)
-			{
-				free(line);
-				close(fd[STDOUT_FILENO]);
-				exit(EXIT_SUCCESS);
-			}
-			ft_putstr_fd("here_doc> ", 1);
-			// ft_putstr(line);
-			// ft_putstr("\n");
-			// free(line);
-			
+			free(line);
+			break;
 		}
+		ft_putstr_fd(line, fd[STDOUT_FILENO]);
 		free(line);
-		close(fd[STDOUT_FILENO]);
 	}
-	else
-	{
-		close(fd[STDOUT_FILENO]);
-		if (dup2(fd[STDIN_FILENO], STDIN_FILENO) == -1)
-			perror("dup2");
-		close(fd[STDIN_FILENO]);
-		waitpid(pid, NULL, 0);
-	}
+	return (fd[STDOUT_FILENO]);
 }
 
 void ft_execute(char *cmd, char **env)
@@ -63,16 +44,16 @@ void ft_execute(char *cmd, char **env)
 	int pid;
 
 	if (pipe(fd) == -1)
-		perror("pipe");
+		ft_perror("pipe");
 	pid = fork();
 	if (pid == -1)
-		perror("pid");
+		ft_perror("fork");
 	if (pid == 0)
 	{
 		close(fd[STDIN_FILENO]);
 		dup2(fd[STDOUT_FILENO], STDOUT_FILENO);
 		close(fd[STDOUT_FILENO]);
-		ft_get_cmd_path(cmd, env);
+		ft_get_cmd_path(*cmd, env);
 	}
 	else
 	{
@@ -85,19 +66,29 @@ void ft_execute(char *cmd, char **env)
 
 void ft_pipex(int argc, char *argv[], char **env)
 {
-	int fd[2];
+	int	fd[2];
+	int	*p[2];
+	int	i;
 
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
-		here_doc(argc, argv);
-		fd[STDOUT_FILENO] = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND);
+		fd[STDIN_FILENO] = here_doc(argc, argv);
+		fd[STDOUT_FILENO] = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0666);
+		i = 3;
 	}
 	else
 	{
 		fd[STDIN_FILENO] = open(argv[1], O_RDONLY);
-		fd[STDOUT_FILENO] = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC);
-		dup2(fd[STDIN_FILENO], STDIN_FILENO);
+		fd[STDOUT_FILENO] = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		i = 2;
 	}
-	dup2(fd[STDOUT_FILENO], STDOUT_FILENO);
-	ft_execute(argv[argc - 2], env);
+	p = malloc((argc - 2) * sizeof(int *));
+	while (argv[i])
+	{
+		if (i != argc - 2)
+			if (pipe(p1) == -1)
+				ft_perror("pipe");
+		ft_execute(argv[i], env);
+		i++;
+	}
 }

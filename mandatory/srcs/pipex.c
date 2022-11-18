@@ -6,7 +6,7 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 22:10:57 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/16 10:58:58 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:24:31 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	exec_second_cmd(int *pipefd, int *fd, char **av, char *env[])
 		perror("fork");
 	if (pid == 0)
 	{
-		fd[1] = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd[1] = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		if (fd[1] < 0)
 			perror(av[4]);
 		cmd = ft_split(av[3], ' ');
