@@ -6,7 +6,7 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:23:56 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/18 17:39:16 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/19 09:58:16 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void ft_pipex(int argc, char *argv[], char **env)
 		fd[STDOUT_FILENO] = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		i = 2;
 	}
-	p = malloc((argc - 2) * sizeof(int *));
+	*p = malloc((argc - 2) * sizeof(int *));
 	while (argv[i])
 	{
 		if (i != argc - 2)
-			if (pipe(p1) == -1)
+			if (pipe(*p1) == -1)
 				ft_perror("pipe");
 		ft_execute(argv[i], env);
 		i++;
