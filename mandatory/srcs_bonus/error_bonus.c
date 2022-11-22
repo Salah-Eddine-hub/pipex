@@ -6,18 +6,18 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:33:31 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/18 14:49:38 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:53:59 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-static void	ft_putchar_fd(char c, int fd)
+static	void	ft_putchar_fd(char c, int fd)
 {
 	write (fd, &c, 1);
 }
 
-static void	ft_putendl_fd(char *s, int fd)
+static	void	ft_putendl_fd(char *s, int fd)
 {
 	int	i;
 
@@ -31,12 +31,12 @@ static void	ft_putendl_fd(char *s, int fd)
 
 void	ft_error(char *str)
 {
-    ft_putendl_fd(str, STDERR_FILENO);
-    exit(EXIT_FAILURE);
+	ft_putendl_fd(str, STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_perror(char *str)
 {
 	perror(str);
-    exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }

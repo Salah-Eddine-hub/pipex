@@ -6,7 +6,7 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:42:11 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/16 15:05:59 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:51:34 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define BUFFER_SIZE 1
 
-static int	ft_read_fd(int fd, char **next_line)
+static	int	ft_read_fd(int fd, char **next_line)
 {
 	static char	buffer[1024][BUFFER_SIZE + 1];
 	int			ret;

@@ -6,7 +6,7 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:30:25 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/16 16:57:49 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:58:22 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const	char *str)
 {
-	size_t	i; 
+	size_t	i;
 	char	*s;
 
 	s = (char *)str;
@@ -24,18 +24,17 @@ size_t	ft_strlen(const	char *str)
 	return (i);
 }
 
-void    ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(str[i])
-    {
-        write(1, &str[i], 1);
-        i ++;
-    }
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i ++;
+	}
 }
-
 
 void	ft_putstr_fd(char *s, int fd)
 {

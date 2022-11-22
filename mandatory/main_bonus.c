@@ -6,14 +6,13 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:25:27 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/16 17:49:19 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:34:23 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/pipex_bonus.h"
 
-
-int main(int argc, char *argv[], char **env)
+int	main(int argc, char *argv[], char **env)
 {
 	if (argc < 5)
 		ft_error("Error: Invalid argument");

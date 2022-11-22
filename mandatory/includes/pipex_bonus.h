@@ -6,25 +6,24 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:31:35 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/18 17:22:42 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:37:18 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
-#define PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 //libraries
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <fcntl.h>
 
-
-int     ft_get_cmd_path(char **cmd, char **env);
+int		ft_get_cmd_path(char *cmd, char **env);
 void	ft_pipex(int argc, char *argv[], char **env);
-void	ft_execute(char **cmd, char **env);
+void	ft_execute(char *cmd, char **env);
 int		here_doc(int argc, char *argv[]);
 //functions libft
 char	**ft_split(char const *s, char c);
@@ -37,7 +36,6 @@ void	ft_error(char *str);
 void	ft_perror(char *str);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putstr(char *str);
-
 
 // function get_next_line
 char	*get_next_line(int fd);

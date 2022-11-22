@@ -6,19 +6,19 @@
 /*   By: sharrach <sharrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:33:11 by sharrach          #+#    #+#             */
-/*   Updated: 2022/11/18 17:27:42 by sharrach         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:54:35 by sharrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-static char	**get_path(char *env[])
+static	char	**get_path(char *env[])
 {
 	char	**paths;
 	int		i;
 
 	i = 0;
-	while(env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
 		i++;
 	if (!env[i])
 		return (NULL);
@@ -26,31 +26,71 @@ static char	**get_path(char *env[])
 	return (paths);
 }
 
-int ft_get_cmd_path(char **cmd, char **env)
+static	char	*ft_strcat(char *dest, const char *src)
 {
-	char	**paths;
-	char	*path;
+	int	i;
+	int	j;
+	int	lendest;
+	int	lensrc;
+	int	lenofboth;
+
+	i = 0;
+	j = 0;
+	lendest = ft_strlen(dest);
+	lensrc = ft_strlen(src);
+	lenofboth = lendest + lensrc;
+	while (i < lendest)
+		i++;
+	while (i < lenofboth)
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+static	char	*ft_stradd(char const *s1, char const *s2)
+{
+	char	*s;
+
+	if (!s1 || !s2)
+		return (NULL);
+	s = ((char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (s == 0)
+		return (NULL);
+	ft_strcpy(s, (char *) s1);
+	ft_strcat(s, (char *) s2);
+	free((void *)s1);
+	return (s);
+}
+
+int	ft_get_cmd_path(char *args, char **env)
+{
+	char	**cmd;
+	char	**path;
 	char	*add_slash;
 	int		i;
 
-	paths = get_path(env);
-	if (!paths)
+	cmd = ft_split(args, ' ');
+	path = get_path(env);
+	if (!path)
 		return (0);
 	i = 0;
-	while (paths[i])
+	while (path[i])
 	{
-		add_slash = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(add_slash, *cmd);
-		free(add_slash);
-		if(!access(path, F_OK) && !access(path, X_OK))
+		add_slash = ft_strjoin(path[i], "/");
+		add_slash = ft_stradd(add_slash, cmd[0]);
+		if (!access(add_slash, F_OK) && !access(add_slash, X_OK))
 		{
-			free_2d(paths);
-			free(*cmd);
-			return (*cmd = path, 1);
+			if (execve(add_slash, cmd, NULL) == -1)
+				ft_perror("exceve");
 		}
+		free(add_slash);
 		i++;
-		free(path);
 	}
-	free_2d(paths);
+	free_2d(cmd);
+	free_2d(path);
 	return (0);
 }
